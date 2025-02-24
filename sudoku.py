@@ -46,19 +46,8 @@ def fill_sudoku(board: list, num_attempts=30) -> list:
 
 def generate_sudoku() -> list:
     """Generates a valid initial Sudoku board with some cells filled."""
-    # board = initial_state()  # Start with an empty board
-    # return fill_sudoku(board)
-    return [
-    [0, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0],
-    [8, 0, 0, 0, 6, 0, 0, 0, 3],
-    [4, 0, 0, 8, 0, 3, 0, 0, 1],
-    [7, 0, 0, 0, 2, 0, 0, 0, 6],
-    [0, 6, 0, 0, 0, 0, 2, 8, 0],
-    [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9]
-]
+    board = initial_state()  # Start with an empty board
+    return fill_sudoku(board)
 
 # def solved(board: list) -> bool:
 #     """Returns True if the Sudoku board is completely solved, otherwise False."""
