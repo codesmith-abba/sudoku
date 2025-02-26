@@ -95,10 +95,10 @@ def result(board, action, val):
 
 def select_unassigned_var(board):
     """Finds the first empty (0) position and returns its (row, col)."""
-    for i in range(9):
-        for j in range(9):
+    for i in range(len(board)):
+        for j in range(len(board[0])):
             if board[i][j] == EMPTY:
-                return i, j
+                return (i, j)
     return None  # If no empty cell is found (should not happen if backtrack is used correctly)
 
 def consistent(board):
@@ -129,7 +129,7 @@ def solved(board):
     """Returns True if the Sudoku board is fully solved."""
     return all(EMPTY not in row for row in board)  # No empty cells
 
-def backtrack(board):
+def backtrack(board: list) -> list | None:
     """Solves the Sudoku puzzle using backtracking."""
     if solved(board):  # Base case: If solved, return the solution
         return board
@@ -149,26 +149,30 @@ def backtrack(board):
     return None  # Backtrack if no valid number works
 
 # Example Usage:
-sudoku_board = [
-    [0, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0],
-    [8, 0, 0, 0, 6, 0, 0, 0, 3],
-    [4, 0, 0, 8, 0, 3, 0, 0, 1],
-    [7, 0, 0, 0, 2, 0, 0, 0, 6],
-    [0, 6, 0, 0, 0, 0, 2, 8, 0],
-    [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9]
-]
+sudoku_board = generate_sudoku()
+# [
+#     [0, 3, 0, 0, 7, 0, 0, 0, 0],
+#     [6, 0, 0, 1, 9, 5, 0, 0, 0],
+#     [0, 9, 8, 0, 0, 0, 0, 6, 0],
+#     [8, 0, 0, 0, 6, 0, 0, 0, 3],
+#     [4, 0, 0, 8, 0, 3, 0, 0, 1],
+#     [7, 0, 0, 0, 2, 0, 0, 0, 6],
+#     [0, 6, 0, 0, 0, 0, 2, 8, 0],
+#     [0, 0, 0, 4, 1, 9, 0, 0, 5],
+#     [0, 0, 0, 0, 8, 0, 0, 7, 9]
+# ]
 
 solution = backtrack(sudoku_board)
+print("Initial Board:")
+for row in sudoku_board:
+    print(row)
 
-# if solution:
-#     print("Solved Sudoku:")
-#     for row in solution:
-#         print(row)
-# else:
-#     print("No solution found.")
+if solution:
+    print("Solved Sudoku:")
+    for row in solution:
+        print(row)
+else:
+    print("No solution found.")
 
 
 # board = generate_sudoku()

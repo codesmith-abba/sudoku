@@ -31,6 +31,7 @@ VARIABLES = sudoku.VARIABLES
 game_start = False
 is_custom_value = False
 cell_selected = None
+selected_cells = set()
 cell_value = None
 selected_var = None
 board = sudoku.generate_sudoku()
@@ -89,10 +90,11 @@ while running:
                     if tiles[i][j].collidepoint(mouse_pos):
                         if board[i][j] == EMPTY:
                             cell_selected = (i, j)
+                            selected_cells.add((i, j))
+                            print(f"Selected Cells: {selected_cells}")
                             print(f"Cell selected: {cell_selected}")
-                        elif is_custom_value:
+                        elif is_custom_value and (i, j) in selected_cells:
                             board[i][j] = EMPTY
-                            is_custom_value = False
                             print(f"Cell cleared: {cell_selected}")
                         else:
                             cell_selected = None
@@ -115,7 +117,8 @@ while running:
                     selected_var = value
                     if cell_selected is not None:
                         board[cell_selected[0]][cell_selected[1]] = selected_var
-                        is_custom_value = True
+                        if (cell_selected[0], cell_selected[1]) in selected_cells:
+                            is_custom_value = True
                         print(f"Cell {cell_selected} set to {selected_var}")
                     else:
                         print("Select a cell first")
