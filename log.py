@@ -21,7 +21,5 @@ def load_logs(file):
     pass
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        sys.exit("Usage: python3 log.py logs")
     main()
 
